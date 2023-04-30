@@ -12,15 +12,19 @@ const keyLayoutEn = [
     "shift", 'я z', 'ч x', 'с c', 'м v', 'и b', 'т n', 'ь m', '<б,', '>ю.', '?./',
     "hide", "mic", "volume", "language", "space", "left", "right",
 ];
+let currentLanguage = "ru";
+
 const inputArea = document.createElement("textarea");
 inputArea.className = "input-area";
 document.body.appendChild(inputArea);
-const keyboard = document.createElement("div");
-function generateKeyboard() {
+
+
+function generateKeyboard(lang) {
     // Create the keyboard container
+    const keyboard = document.createElement("div");
     keyboard.classList.add("keyboard");
     // Create the keys
-    keyLayoutRu.forEach(key => {
+    lang.forEach(key => {
         const keyElement = document.createElement("button");
         keyElement.classList.add("key");
         keyElement.textContent = key;
@@ -39,5 +43,51 @@ function generateKeyboard() {
       });
     document.body.appendChild(keyboard);
   }
-generateKeyboard();
+  window.addEventListener("load", () => {
+    generateKeyboard(keyLayoutRu);
+    // Add event listener for switching the language
+    const langButton = document.createElement("button");
+    langButton.textContent = "EN";
+    langButton.classList.add("lang-button");
+    langButton.addEventListener("click", () => {
+      switchLanguage();
+      langButton.textContent = currentLanguage.toUpperCase();
+    });
+    document.body.appendChild(langButton);
+    // Add event listener for typing on the physical keyboard
+    document.addEventListener("keydown", event => {
+      const key = event.key;
+      const keyElement = document.querySelector(`.key:contains(${key})`);
+      if (keyElement) {
+        keyElement.classList.add("active");
+      }
+      if (!event.ctrlKey && !event.altKey && !event.shiftKey) {
+        event.preventDefault();
+        typeKey(key);
+      }
+    });
+    document.addEventListener("keyup", event => {
+      const key = event.key;
+      const keyElement = document.querySelector(`.key:contains(${key})`);
+      if (keyElement) {
+        keyElement.classList.remove("active");
+      }
+    });
+  });
+
+function switchLanguage() {
+  if (currentLanguage === "en") {
+    currentLanguage = "ru";
+    updateKeyboard(keyLayoutRu);
+  } else {
+    currentLanguage = "en";
+    updateKeyboard(keyLayoutEn);
+  }
+}
+
+function updateKeyboard(keys) {
+  const keyboard = document.querySelector(".keyboard");
+  document.body.removeChild(keyboard);
+  generateKeyboard(keys);
+}
 
