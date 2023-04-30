@@ -12,19 +12,32 @@ const keyLayoutEn = [
     "shift", 'я z', 'ч x', 'с c', 'м v', 'и b', 'т n', 'ь m', '<б,', '>ю.', '?./',
     "hide", "mic", "volume", "language", "space", "left", "right",
 ];
-
-const keyboard = document.createElement("div");
-keyboard.className = "keyboard";
-document.body.appendChild(keyboard);
-
-// Создаем языковой переключатель и добавляем его на страницу
-const languageToggle = document.createElement("div");
-languageToggle.className = "language-toggle";
-languageToggle.textContent = "ENG";
-document.body.appendChild(languageToggle);
-
-// Создаем текстовую область для ввода и добавляем ее на страницу
 const inputArea = document.createElement("textarea");
 inputArea.className = "input-area";
 document.body.appendChild(inputArea);
+const keyboard = document.createElement("div");
+function generateKeyboard() {
+    // Create the keyboard container
+    keyboard.classList.add("keyboard");
+    // Create the keys
+    keyLayoutRu.forEach(key => {
+        const keyElement = document.createElement("button");
+        keyElement.classList.add("key");
+        keyElement.textContent = key;
+        keyboard.appendChild(keyElement);
+        // Add event listeners for the mouse and keyboard
+        keyElement.addEventListener("mousedown", () => {
+          keyElement.classList.add("active");
+          typeKey(key);
+        });
+        keyElement.addEventListener("mouseup", () => {
+          keyElement.classList.remove("active");
+        });
+        keyElement.addEventListener("mouseleave", () => {
+          keyElement.classList.remove("active");
+        });
+      });
+    document.body.appendChild(keyboard);
+  }
+generateKeyboard();
 
