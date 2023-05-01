@@ -91,3 +91,6 @@
     font-family: 'Montserrat', sans-serif;
     resize: none;
 }
+.keyboard__key-hover {
+    background: rgba(181, 219, 144, 0.822);
+}
