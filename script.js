@@ -325,11 +325,21 @@ const Keyboard = {
     },
     hoverButtonEffect(numCode, keyElement) {
         window.addEventListener("keydown", () => {
-            if (keyNum === numCode) keyElement.classList.add('keyboard__key-hover');
+            if(numCode==20){
+                if(this.properties.capsLock){
+                    keyElement.classList.add('keyboard__key-hover');
+                }else{
+                    keyElement.classList.remove('keyboard__key-hover');
+                }
+            }else{
+                if (keyNum === numCode) keyElement.classList.add('keyboard__key-hover');
+            }
         });
 
         window.addEventListener("keyup", () => {
-            keyElement.classList.remove('keyboard__key-hover');
+            if(numCode!=20){
+                keyElement.classList.remove('keyboard__key-hover');
+            }
         });
     },
     selectKeyNumber(symbols) {
@@ -367,7 +377,6 @@ const Keyboard = {
     close() {
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.add("keyboard--hidden");
     }
 };
 
@@ -376,7 +385,6 @@ window.addEventListener("DOMContentLoaded", function () {
     document.onkeydown = Keyboard.keyPress;
 });
 
-// English keyboard
 const keyLayoutEn = [
     '! 1', '@"2', '#№3', '$;4', '% 5', '^:6', '&?7', '* 8', '( 9', ') 0', '_ -', '+ =', "backspace",
     'й q', 'ц w', 'у e', 'к r', 'е t', 'н y', 'г u', 'ш i', 'щ o', 'з p', '{х[', '}ъ]', '| \\',
