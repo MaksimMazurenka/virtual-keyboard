@@ -105,7 +105,7 @@ const Keyboard = {
 
                 case "caps":
                     keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable", 'key__active', 'lower__symbol');
-                    keyElement.textContent = "CapsLock";
+                    keyElement.textContent = "Caps";
                     keyElement.addEventListener("click", () => {
                         this.properties.shift ? this._toggleShift() : this.properties.shift;
                         this._toggleCapsLock();
