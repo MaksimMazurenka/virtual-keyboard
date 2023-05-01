@@ -1,5 +1,6 @@
-
 const textarea = document.createElement("textarea");
+textarea.classList.add("textarea");
+document.body.appendChild(textarea);
 let pos = textarea.selectionStart;
 let shift = 0;
 
@@ -73,17 +74,18 @@ const Keyboard = {
 
             switch (key) {
                 case "backspace":
-                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.classList.add("keyboard__key--wide",'key__active','lower__symbol');
+                    keyElement.textContent = "Back";
                     break;
 
                 case "caps":
-                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
-
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable" ,'key__active','lower__symbol');
+                    keyElement.textContent = "CapsLock";
                     break;
 
                 case "enter":
-                    keyElement.classList.add("keyboard__key--wide");
-
+                    keyElement.classList.add("keyboard__key--wide" ,'key__active','lower__symbol');
+                    keyElement.textContent = "Enter";
                     break;
 
                 case "language":
@@ -102,23 +104,24 @@ const Keyboard = {
                     break;
 
                 case "space":
-                    keyElement.classList.add("keyboard__key--extra-wide");
+                    keyElement.classList.add("keyboard__key--extra-wide",'key__active','lower__symbol');
+                    keyElement.textContent ="|____________________|"
                     break;
 
                 case "shift":
-                    keyElement.classList.add("keyboard__key--wide", "key__passive", "shift");
+                    keyElement.classList.add("keyboard__key--wide", "key__passive", "shift",'lower__symbol');
                     keyElement.textContent = 'Shift';
 
                     break;
 
                 case "left":
-                    keyElement.classList.add("keyboard__key--wide");
-
+                    keyElement.classList.add("keyboard__key--wide",'key__active','lower__symbol');
+                    keyElement.textContent = "<";
                     break;
 
                 case "right":
-                    keyElement.classList.add("keyboard__key--wide");
-
+                    keyElement.classList.add("keyboard__key--wide",'key__active','lower__symbol');
+                    keyElement.textContent = ">";
                     break;
 
                 default:

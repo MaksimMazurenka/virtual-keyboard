@@ -77,3 +77,17 @@
     width: 36%;
     max-width: 500px;
 }
+
+.textarea {
+    display: block;
+    width: 90%;
+    margin: 30px auto;
+    padding: 10px;
+    font-size: 20px;
+    height: calc(100vh - 380px);
+    min-height: 300px;
+    border-radius: 1em;
+    border: 8px solid lightgray;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+}
