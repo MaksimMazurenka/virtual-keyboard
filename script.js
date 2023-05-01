@@ -150,6 +150,12 @@ const Keyboard = {
                     lowerSymbol.textContent = symbols[2].toLowerCase();
                     keyElement.append(lowerSymbol);
 
+                    keyElement.addEventListener("click", () => {
+                      let letter = this.chooseLetter(keyElement, symbols);
+                      this.addLetter(letter);
+                      this.properties.shift ? this._toggleShift() : this.properties.shift;
+                      this._triggerEvent("oninput");
+                    });
                     break;
             }
 
@@ -162,6 +168,45 @@ const Keyboard = {
 
         return fragment;
     },
+    _triggerEvent(handlerName) {
+      if (typeof this.eventHandlers[handlerName] == "function") {
+          this.eventHandlers[handlerName](this.properties.value);
+      }
+   },
+    addLetter(letter) {
+      this.properties.value = textarea.value;
+
+      this.properties.selectionStart = textarea.selectionStart;
+      this.properties.selectionEnd = this.properties.selectionStart;
+
+      if(textarea.selectionStart !== textarea.value.length) {
+
+          let arr = this.properties.value.split('');
+          arr.splice(this.properties.selectionStart, 0, letter);
+          this.properties.value = arr.join('');
+
+          this.properties.selectionStart++;
+          pos = textarea.selectionEnd = textarea.selectionStart  = this.properties.selectionEnd = this.properties.selectionStart;
+
+      } else {
+          pos = ++this.properties.selectionStart;
+          this.properties.value += letter;
+      }
+  },
+    chooseLetter(keyElement, symbols) {
+      let letter = 0;
+
+      if(this.properties.capsLock || this.properties.shift) {
+          const charCode = keyElement.lastChild.textContent.charCodeAt();
+          if((this.properties.shift && ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || (charCode >= 1040 && charCode <= 1103))) || (this.properties.capsLock && !this.properties.shift)) {
+              letter = keyElement.lastChild.lastChild.textContent;
+          } else if ((this.properties.capsLock && this.properties.shift) || this.properties.shift){
+              letter = symbols[0];
+          }
+      } else  letter = keyElement.lastChild.lastChild.textContent;
+
+      return letter;
+  }
 };
 
 window.addEventListener("DOMContentLoaded", function () {
