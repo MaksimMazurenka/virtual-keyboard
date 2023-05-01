@@ -1,0 +1,79 @@
+.keyboard {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    user-select: none;
+    transition: bottom 0.4s;
+}
+.keyboard__keys {
+    text-align: center;
+}
+
+.keyboard__key {
+    height: 45px;
+    width: 6%;
+    max-width: 90px;
+    margin: 3px;
+    border-radius: 4px;
+    border: none;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    flex-direction: column;
+}
+
+.upper__symbols {
+    height: 20px;
+    font-size: 1.20rem;
+    justify-content: space-between;
+    display: flex;
+    font-weight: bold;
+    margin-top: 0.05em;
+    margin-right: 0.4em;
+}
+
+.upper__symbols-right {
+    width: 1vw;
+    margin-left: 2vw;
+    max-width: 20px;
+}
+
+.lower__symbol {
+    height: 25px;
+    font-size: 1.5rem;
+    margin-left: 0.5em;
+    font-weight: bold;
+    padding-bottom: 0.2em;
+}
+
+.use-keyboard-input {
+    display: block;
+    width: 90%;
+    margin: 30px auto;
+    padding: 10px;
+    font-size: 20px;
+    height: calc(100vh - 380px);
+    min-height: 300px;
+    border-radius: 1em;
+    border: 8px solid;
+    resize: none;
+}
+
+.keyboard__key--wide {
+    width: 12%;
+    max-width: 90px;
+}
+
+.keyboard__key--extra-wide {
+    width: 36%;
+    max-width: 500px;
+}
